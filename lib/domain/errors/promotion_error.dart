@@ -1,1 +1,1 @@
-abstract class PromotionException {}
+abstract class PromotionError implements Exception {}
