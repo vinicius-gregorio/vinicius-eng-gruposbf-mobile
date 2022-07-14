@@ -1,9 +1,8 @@
-import 'package:vinicius_eng_gruposbf_mobile/domain/repositories/promotion/promotion_repository.dart';
-
-import '../../entities/promotion.dart';
+import '../../repositories/promotion/promotion_repository.dart';
+import '../../typedefs/get_promotion_typedef.dart';
 
 abstract class GetPromotionsUsecase {
-  Future<List<Promotion>> call();
+  GetPromotionsCall call();
 }
 
 class GetPromotionsUsecaseImpl implements GetPromotionsUsecase {
@@ -12,7 +11,7 @@ class GetPromotionsUsecaseImpl implements GetPromotionsUsecase {
   GetPromotionsUsecaseImpl(this.repository);
 
   @override
-  Future<List<Promotion>> call() async {
+  GetPromotionsCall call() async {
     return await repository.getPromotions();
   }
 }

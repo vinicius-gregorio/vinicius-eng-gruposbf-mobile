@@ -1,5 +1,5 @@
-import '../../entities/promotion.dart';
+import '../../typedefs/get_promotion_typedef.dart';
 
 abstract class PromotionRepository {
-  Future<List<Promotion>> getPromotions();
+  GetPromotionsCall getPromotions();
 }
