@@ -1,10 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/promotion/get_promotions_usecase.dart';
-
-import '../../domain/entities/promotion.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/states/home_state.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/home_store.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,34 +10,36 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Promotion> promotions = [];
+  final store = HomeStore();
   @override
   void initState() {
-    init();
+    store.getPromotions();
     super.initState();
-  }
-
-  void init() async {
-    var service = GetIt.I.get<GetPromotionsUsecase>();
-    var fold = await service();
-    promotions = fold.fold((l) => [], (r) => r);
-    setState(() {});
-    log(promotions.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: Container(
-        child: ListView.builder(
-            itemBuilder: ((context, index) => ListTile(
-                  title: Text(promotions[index].name),
-                )),
-            itemCount: promotions.length),
-      ),
-    );
+        appBar: AppBar(
+          title: const Text('Home'),
+        ),
+        body: ValueListenableBuilder(
+            valueListenable: store,
+            builder: ((context, state, child) {
+              if (state is LoadingHomeState) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              if (state is SuccessHomeState) {
+                return ListView.builder(
+                    itemBuilder: ((context, index) => ListTile(
+                          title: Text(state.promotions[index].name),
+                        )),
+                    itemCount: state.promotions.length);
+              }
+              return const SizedBox.shrink();
+            })));
   }
 }

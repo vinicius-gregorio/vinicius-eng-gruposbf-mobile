@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
+import 'package:vinicius_eng_gruposbf_mobile/config/app_log.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/repositories/promotion/promotion_repository.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/promotion/get_promotions_usecase.dart';
 import 'package:vinicius_eng_gruposbf_mobile/external/datasources/promotion_datasource.dart';
@@ -20,5 +19,5 @@ Future<void> registerDependencies() async {
   getIt.registerFactory<GetPromotionsUsecase>(
       () => GetPromotionsUsecaseImpl(getIt.get<PromotionRepository>()));
 
-  getIt.allReady().then((value) => log('ready '));
+  getIt.allReady().then((value) => appLog('ready '));
 }
