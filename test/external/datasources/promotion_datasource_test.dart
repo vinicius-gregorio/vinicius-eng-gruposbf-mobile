@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/promotion.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/promotion/get_promotions_usecase.dart';
@@ -5,7 +6,7 @@ import 'package:vinicius_eng_gruposbf_mobile/external/datasources/promotion_data
 import 'package:vinicius_eng_gruposbf_mobile/infra/repositories/promotion_repository.dart';
 
 void main() {
-  final usecase = GetPromotionsUsecaseImpl(PromotionRepositoryImpl(PromotionDatasourceImpl()));
+  final usecase = GetPromotionsUsecaseImpl(PromotionRepositoryImpl(PromotionDatasourceImpl(Dio())));
   test('should complete request', () {
     expect(usecase(), completes);
   });
