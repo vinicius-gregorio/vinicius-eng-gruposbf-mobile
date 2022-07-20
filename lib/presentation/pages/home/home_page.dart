@@ -45,7 +45,13 @@ class _HomePageState extends State<HomePage> {
                 if (state is SuccessHomeState) {
                   return ListView(
                     children: [
-                      Image.asset(AppImages.promotionBanner),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Image.asset(
+                        AppImages.promotionBanner,
+                        fit: BoxFit.cover,
+                      ),
                       const Center(
                         child: Text(
                           'Promoções em destaque',
@@ -68,6 +74,9 @@ class _HomePageState extends State<HomePage> {
                             return PromotionCard(promotion: promotion);
                           }),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 47,
                       ),
                       const CentauroFooter(),
                     ],
