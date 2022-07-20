@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/states/home_state.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/home_store.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_colors.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_images.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/widgets/centauro_app_bar/centauro_app_bar.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/widgets/centauro_footer/centauro_footer.dart';
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          backgroundColor: AppColors.appBackground,
           appBar: const PreferredSize(
             preferredSize: Size(double.infinity, 104),
             child: CentauroAppBar(),
@@ -50,19 +52,6 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(fontSize: 26),
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(16),
-                      //   child: ListView.builder(
-                      //       shrinkWrap: true,
-                      //       physics: const NeverScrollableScrollPhysics(),
-                      //       itemBuilder: ((context, index) {
-                      //         Promotion promotion = state.promotions[index];
-                      //         return ListTile(
-                      //           title: Text(promotion.name),
-                      //         );
-                      //       }),
-                      //       itemCount: state.promotions.length),
-                      // ),
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: GridView.builder(
