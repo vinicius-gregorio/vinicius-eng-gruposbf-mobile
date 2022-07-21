@@ -5,7 +5,7 @@ import 'package:vinicius_eng_gruposbf_mobile/domain/typedefs/cart_typedefs.dart'
 
 abstract class CartRepository {
   GetCartCall getCart();
-  Future<Either<CartError, void>> addToCart(CartItem cart);
+  Future<Either<CartError, void>> addToCart(String promotionId);
   Future<Either<CartError, void>> removeFromCart(String cartItemId);
   CheckoutCartCall checkoutCart();
 }
