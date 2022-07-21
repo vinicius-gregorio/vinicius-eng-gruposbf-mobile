@@ -1,7 +1,10 @@
+import 'package:dartz/dartz.dart';
+
+import '../../errors/cart_error.dart';
 import '../../repositories/cart/cart_repository.dart';
 
 abstract class RemoveFromCartUsecase {
-  Future<void> call(String cartItemId);
+  Future<Either<CartError, void>> call(String cartItemId);
 }
 
 class RemoveFromCartUsecaseImpl implements RemoveFromCartUsecase {
@@ -10,7 +13,7 @@ class RemoveFromCartUsecaseImpl implements RemoveFromCartUsecase {
   RemoveFromCartUsecaseImpl(this.repository);
 
   @override
-  Future<void> call(String cartItemId) async {
+  Future<Either<CartError, void>> call(String cartItemId) async {
     return await repository.removeFromCart(cartItemId);
   }
 }

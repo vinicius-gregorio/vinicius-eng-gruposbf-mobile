@@ -1,9 +1,11 @@
+import 'package:dartz/dartz.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
+import 'package:vinicius_eng_gruposbf_mobile/domain/errors/cart_error.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/typedefs/cart_typedefs.dart';
 
 abstract class CartRepository {
   GetCartCall getCart();
-  Future<void> addToCart(CartItem cart);
-  Future<void> removeFromCart(String cartItemId);
+  Future<Either<CartError, void>> addToCart(CartItem cart);
+  Future<Either<CartError, void>> removeFromCart(String cartItemId);
   CheckoutCartCall checkoutCart();
 }

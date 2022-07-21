@@ -1,8 +1,11 @@
+import 'package:dartz/dartz.dart';
+
 import '../../entities/cart_item.dart';
+import '../../errors/cart_error.dart';
 import '../../repositories/cart/cart_repository.dart';
 
 abstract class AddToCartUsecase {
-  Future<void> call(CartItem cart);
+  Future<Either<CartError, void>> call(CartItem cart);
 }
 
 class AddToCartUsecaseImpl implements AddToCartUsecase {
@@ -11,7 +14,7 @@ class AddToCartUsecaseImpl implements AddToCartUsecase {
   AddToCartUsecaseImpl(this.repository);
 
   @override
-  Future<void> call(CartItem cart) async {
+  Future<Either<CartError, void>> call(CartItem cart) async {
     return await repository.addToCart(cart);
   }
 }
