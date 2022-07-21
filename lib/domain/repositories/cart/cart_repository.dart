@@ -7,5 +7,5 @@ abstract class CartRepository {
   GetCartCall getCart();
   Future<Either<CartError, void>> addToCart(String promotionId);
   Future<Either<CartError, void>> removeFromCart(String cartItemId);
-  CheckoutCartCall checkoutCart();
+  CheckoutCartCall checkoutCart(List<CartItem> cartItems);
 }

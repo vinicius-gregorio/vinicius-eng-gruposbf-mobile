@@ -1,8 +1,9 @@
+import '../../entities/cart_item.dart';
 import '../../repositories/cart/cart_repository.dart';
 import '../../typedefs/cart_typedefs.dart';
 
 abstract class CheckoutCartUsecase {
-  CheckoutCartCall call();
+  CheckoutCartCall call(List<CartItem> cartItems);
 }
 
 class CheckoutCartUsecaseImpl implements CheckoutCartUsecase {
@@ -12,7 +13,7 @@ class CheckoutCartUsecaseImpl implements CheckoutCartUsecase {
   });
 
   @override
-  CheckoutCartCall call() async {
-    return repository.checkoutCart();
+  CheckoutCartCall call(List<CartItem> cartItems) async {
+    return repository.checkoutCart(cartItems);
   }
 }

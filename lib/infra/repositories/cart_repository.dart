@@ -5,6 +5,7 @@ import 'package:vinicius_eng_gruposbf_mobile/domain/errors/cart_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:vinicius_eng_gruposbf_mobile/infra/datasources/cart_datasource.dart';
 
+import '../../domain/entities/cart_item.dart';
 import '../../domain/repositories/cart/cart_repository.dart';
 
 class CartRepositoryImpl implements CartRepository {
@@ -23,7 +24,7 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  CheckoutCartCall checkoutCart() {
+  CheckoutCartCall checkoutCart(List<CartItem> cartItems) {
     // TODO: implement checkoutCart
     throw UnimplementedError();
   }
