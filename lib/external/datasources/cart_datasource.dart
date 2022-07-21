@@ -28,9 +28,11 @@ class CartDatasourceImpl implements CartDatasource {
   }
 
   @override
-  Future checkoutCart() async {
+  Future checkoutCart(List<CartItem> cartItems) async {
     try {
-      final response = await dio.post('http://10.0.2.2:3000/checkout', data: {});
+      final response = await dio.post('http://10.0.2.2:3000/checkout', data: {
+        "items": cartItems,
+      });
       return response.data;
     } catch (e) {
       appLog(e.toString());
