@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_colors.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_images.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_text_styles.dart';
 
 class SearchInput extends StatelessWidget {
   const SearchInput({Key? key}) : super(key: key);
@@ -22,10 +23,7 @@ class SearchInput extends StatelessWidget {
           hintText: 'Buscar por produtos',
           filled: true,
           isDense: true,
-          hintStyle: const TextStyle(
-            color: AppColors.greyHintText,
-            fontSize: 14,
-          ),
+          hintStyle: AppTextStyles.searchHintText,
           suffixIcon: SvgPicture.asset(
             AppImages.searchIcon,
             width: 24,

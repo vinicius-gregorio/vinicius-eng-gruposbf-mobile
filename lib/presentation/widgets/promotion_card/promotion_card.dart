@@ -103,20 +103,3 @@ class PromotionCard extends StatelessWidget {
     );
   }
 }
-
-
-// Positioned(
-//                 left: 105,
-//                 child: Container(
-//                   height: 16,
-//                   width: 35,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(2),
-//                     color: AppColors.appBackground,
-//                     border: Border.all(color: AppColors.redBackground, width: 1),
-//                   ),
-//                   child: Center(
-//                       child: Text('${promotion.discount}%',
-//                           style: const TextStyle(fontSize: 10, color: AppColors.redBackground))),
-//                 ),
-//               ),
