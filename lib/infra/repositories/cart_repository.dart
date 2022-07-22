@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/typedefs/cart_typedefs.dart';
 
 import 'package:vinicius_eng_gruposbf_mobile/domain/errors/cart_error.dart';
@@ -27,7 +28,7 @@ class CartRepositoryImpl implements CartRepository {
   CheckoutCartCall checkoutCart(List<CartItem> cartItems) async {
     try {
       final response = await _cartDatasource.checkoutCart(cartItems);
-      return response.fold((l) => l, (r) => r);
+      return Right(response);
     } on CartError catch (e) {
       return Left(e);
     }
@@ -47,6 +48,17 @@ class CartRepositoryImpl implements CartRepository {
   Future<Either<CartError, void>> removeFromCart(String cartItemId) async {
     try {
       await _cartDatasource.removeFromCart(cartItemId);
+      // ignore: void_checks
+      return const Right('');
+    } on CartError catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  Future<Either<CartError, void>> removeSingleItemFromCart(String cartItemId) async {
+    try {
+      await _cartDatasource.removeSingleItemFromCart(cartItemId);
       // ignore: void_checks
       return const Right('');
     } on CartError catch (e) {

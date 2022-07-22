@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vinicius_eng_gruposbf_mobile/config/app_log.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
-
-import '../../domain/errors/cart_error.dart';
-import '../../infra/datasources/cart_datasource.dart';
+import 'package:vinicius_eng_gruposbf_mobile/domain/errors/cart_error.dart';
+import 'package:vinicius_eng_gruposbf_mobile/infra/adapters/cart_item_adapter.dart';
+import 'package:vinicius_eng_gruposbf_mobile/infra/datasources/cart_datasource.dart';
 
 class CartDatasourceImpl implements CartDatasource {
   final Dio dio;
@@ -15,40 +17,85 @@ class CartDatasourceImpl implements CartDatasource {
   @override
   Future<void> addToCart(String promotionId) async {
     try {
-      List<String>? cart = sharedPreferences.getStringList('cart');
+      List<String>? cart = getCartSharedPreferences();
+
       if (cart == null) {
         sharedPreferences.setStringList('cart', [promotionId]);
       } else {
         sharedPreferences.setStringList('cart', [...cart, promotionId]);
       }
-    } catch (e) {
-      appLog(e.toString());
+    } on DataSourceError catch (e) {
       throw DataSourceError(e.toString());
     }
   }
 
   @override
-  Future checkoutCart(List<CartItem> cartItems) async {
+  Future<Response<ResponseBody>> checkoutCart(List<CartItem> cartItems) async {
     try {
+      final items = cartItems.map((item) => CartItemAdapter.toMap(item)).toList();
       final response = await dio.post('http://10.0.2.2:3000/checkout', data: {
-        "items": cartItems,
+        "items": items,
       });
+      log(response.data);
       return response.data;
-    } catch (e) {
-      appLog(e.toString());
+    } on DataSourceError catch (e) {
       throw DataSourceError(e.toString());
     }
   }
 
   @override
-  Future<List> getCart() {
-    // TODO: implement getCart
-    throw UnimplementedError();
+  Future<List> getCart() async {
+    try {
+      List<String>? cart = getCartSharedPreferences();
+
+      if (cart == null) {
+        return [];
+      } else {
+        return cart;
+      }
+    } on DataSourceError catch (e) {
+      throw DataSourceError(e.toString());
+    }
   }
 
   @override
-  Future<void> removeFromCart(String cartItemId) {
-    // TODO: implement removeFromCart
-    throw UnimplementedError();
+  Future<void> removeFromCart(String cartItemId) async {
+    try {
+      List<String>? cart = getCartSharedPreferences();
+      if (cart == null) {
+        return;
+      } else {
+        for (int i = 0; i < cart.length; i++) {
+          if (cart[i] == cartItemId) {
+            cart.removeAt(i);
+          }
+        }
+
+        await sharedPreferences.setStringList('cart', cart);
+      }
+    } on DataSourceError catch (e) {
+      throw DataSourceError(e.toString());
+    }
+  }
+
+  @override
+  Future<void> removeSingleItemFromCart(String cartItemId) async {
+    try {
+      List<String>? cart = getCartSharedPreferences();
+      if (cart == null) {
+        return;
+      } else {
+        cart.remove(cartItemId);
+
+        await sharedPreferences.setStringList('cart', cart);
+      }
+    } on DataSourceError catch (e) {
+      throw DataSourceError(e.toString());
+    }
+  }
+
+  List<String>? getCartSharedPreferences() {
+    List<String>? cart = sharedPreferences.getStringList('cart');
+    return cart;
   }
 }
