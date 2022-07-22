@@ -34,9 +34,11 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  GetCartCall getCart() {
-    // TODO: implement getCart
-    throw UnimplementedError();
+  GetCartCall getCart() async {
+    try {
+      final response = await _cartDatasource.getCart();
+      // return response as List<String>;
+    } catch (e) {}
   }
 
   @override
