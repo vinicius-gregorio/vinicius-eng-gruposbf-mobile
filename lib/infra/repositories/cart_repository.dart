@@ -28,8 +28,8 @@ class CartRepositoryImpl implements CartRepository {
     try {
       final response = await _cartDatasource.checkoutCart(cartItems);
       return response.fold((l) => l, (r) => r);
-    } catch (e, stackTrace) {
-      return Left(DataSourceError(e.toString(), stackTrace));
+    } on CartError catch (e) {
+      return Left(e);
     }
   }
 
@@ -37,13 +37,20 @@ class CartRepositoryImpl implements CartRepository {
   GetCartCall getCart() async {
     try {
       final response = await _cartDatasource.getCart();
-      // return response as List<String>;
-    } catch (e) {}
+      return Right(response as List<String>);
+    } on CartError catch (e) {
+      return Left(e);
+    }
   }
 
   @override
-  Future<Either<CartError, void>> removeFromCart(String cartItemId) {
-    // TODO: implement removeFromCart
-    throw UnimplementedError();
+  Future<Either<CartError, void>> removeFromCart(String cartItemId) async {
+    try {
+      await _cartDatasource.removeFromCart(cartItemId);
+      // ignore: void_checks
+      return const Right('');
+    } on CartError catch (e) {
+      return Left(e);
+    }
   }
 }
