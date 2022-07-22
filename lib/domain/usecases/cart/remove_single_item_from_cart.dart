@@ -7,10 +7,10 @@ abstract class RemoveSingleItemFromCartUsecase {
   Future<Either<CartError, void>> call(String cartItemId);
 }
 
-class RemoveFromCartUsecaseImpl implements RemoveSingleItemFromCartUsecase {
+class RemoveSingleItemFromCartUsecaseImpl implements RemoveSingleItemFromCartUsecase {
   final CartRepository repository;
 
-  RemoveFromCartUsecaseImpl(this.repository);
+  RemoveSingleItemFromCartUsecaseImpl(this.repository);
 
   @override
   Future<Either<CartError, void>> call(String cartItemId) async {
