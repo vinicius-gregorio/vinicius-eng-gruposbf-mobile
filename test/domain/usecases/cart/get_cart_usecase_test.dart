@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/errors/cart_error.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/repositories/cart/cart_repository.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/get_cart_usecase.dart';

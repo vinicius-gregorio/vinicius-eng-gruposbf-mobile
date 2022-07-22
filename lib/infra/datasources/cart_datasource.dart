@@ -1,8 +1,11 @@
+import 'package:dio/dio.dart';
+
 import '../../domain/entities/cart_item.dart';
 
 abstract class CartDatasource {
   Future<List> getCart();
   Future<void> addToCart(String promotionId);
   Future<void> removeFromCart(String cartItemId);
-  Future checkoutCart(List<CartItem> cartItems);
+  Future<void> removeSingleItemFromCart(String cartItemId);
+  Future<Response> checkoutCart(List<CartItem> cartItems);
 }

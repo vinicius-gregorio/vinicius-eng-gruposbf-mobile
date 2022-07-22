@@ -7,4 +7,11 @@ class CartItemAdapter {
       quantity: data['quantity'],
     );
   }
+
+  static Map<String, dynamic> toMap(CartItem item) {
+    return {
+      'id': item.id,
+      'quantity': item.quantity,
+    };
+  }
 }
