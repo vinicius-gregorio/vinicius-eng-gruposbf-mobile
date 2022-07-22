@@ -13,7 +13,6 @@ class PromotionCardStars extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int numberOfFilledStars = numberOfStars;
-    int numberOfEmptyStars = 0;
     return Row(
       children: [
         // for (int i = 0; i < numberOfFilledStars; i++)

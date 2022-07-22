@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/typedefs/cart_typedefs.dart';
 
 import 'package:vinicius_eng_gruposbf_mobile/domain/errors/cart_error.dart';

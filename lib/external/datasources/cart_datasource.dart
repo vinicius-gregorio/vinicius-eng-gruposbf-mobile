@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vinicius_eng_gruposbf_mobile/config/app_log.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/errors/cart_error.dart';
 import 'package:vinicius_eng_gruposbf_mobile/infra/adapters/cart_item_adapter.dart';
