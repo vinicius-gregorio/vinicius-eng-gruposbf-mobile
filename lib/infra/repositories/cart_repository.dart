@@ -24,9 +24,13 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  CheckoutCartCall checkoutCart(List<CartItem> cartItems) {
-    // TODO: implement checkoutCart
-    throw UnimplementedError();
+  CheckoutCartCall checkoutCart(List<CartItem> cartItems) async {
+    try {
+      final response = await _cartDatasource.checkoutCart(cartItems);
+      return response.fold((l) => l, (r) => r);
+    } catch (e, stackTrace) {
+      return Left(DataSourceError(e.toString(), stackTrace));
+    }
   }
 
   @override
