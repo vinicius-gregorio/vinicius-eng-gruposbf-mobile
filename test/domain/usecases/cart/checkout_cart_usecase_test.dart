@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
@@ -13,14 +14,15 @@ class CartErrorMock extends Mock implements CartError {}
 void main() {
   final repository = CartRepositoryMock();
   final usecase = CheckoutCartUsecaseImpl(repository: repository);
-
+  final httpResponse =
+      Response(requestOptions: RequestOptions(method: 'POST', path: 'http://wwww.google.com'));
   test('should completes usecase', () {
-    when(() => repository.checkoutCart(cartItems)).thenAnswer((_) async => right({}));
+    when(() => repository.checkoutCart(cartItems)).thenAnswer((_) async => right(httpResponse));
     expect(usecase(cartItems), completes);
   });
 
   test('should return anything', () async {
-    when(() => repository.checkoutCart(cartItems)).thenAnswer((_) async => right('anything'));
+    when(() => repository.checkoutCart(cartItems)).thenAnswer((_) async => right(httpResponse));
     final result = await usecase(cartItems);
     final fold = result.fold(
       (l) => left('expected a right'),
