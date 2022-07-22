@@ -42,7 +42,12 @@ void main() {
   });
 }
 
-List<CartItem> cartItems = [
-  CartItem(id: '1', quantity: 2),
-  CartItem(id: '2', quantity: 3),
-];
+List<CartItem> cartItems = List.generate(
+    4,
+    (index) => CartItem(
+        id: 'id',
+        name: 'name',
+        image: 'image',
+        quantity: index,
+        oldPrice: index * 0.32,
+        price: index * 0.36));

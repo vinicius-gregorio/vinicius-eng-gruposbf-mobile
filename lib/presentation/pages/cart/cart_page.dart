@@ -7,12 +7,14 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size(double.infinity, 104),
-        child: CentauroAppBar(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: const PreferredSize(
+          preferredSize: Size(double.infinity, 104),
+          child: CentauroAppBar(),
+        ),
+        body: Container(),
       ),
-      body: Container(),
     );
   }
 }

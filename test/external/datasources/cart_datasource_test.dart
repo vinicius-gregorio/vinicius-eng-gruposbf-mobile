@@ -19,24 +19,25 @@ void main() async {
   final removeSingleItemFromCartUsecase = RemoveSingleItemFromCartUsecaseImpl(
       CartRepositoryImpl(CartDatasourceImpl(dio, sharedPreferences)));
   test('should completes usecase', () {
-    expect(addToCartUsecase('1'), completes);
+    expect(addToCartUsecase(cartItem), completes);
   });
 
   test('should add to cart', () async {
-    addToCartUsecase('2');
+    addToCartUsecase(cartItem);
     List<String>? cart = sharedPreferences.getStringList('cart');
-    String? id = cart?.last;
-    appLog(id.toString());
-    expect(id, '2');
-    expect(id, isA<String>());
-    expect(cart, isA<List<String>>());
+    // String? id = cart?.last;
+    // appLog(id.toString());
+    // expect(id, '2');
+    // expect(id, isA<String>());
+    // expect(cart, isA<List<String>>());
+    print(cart);
   });
 
   test('should remove item from cart', () async {
     String cartItemId = '57';
     List<String>? cart = sharedPreferences.getStringList('cart');
 
-    await addToCartUsecase(cartItemId).then((value) => removeFromCartUsecase(cartItemId));
+    await addToCartUsecase(cartItem).then((value) => removeFromCartUsecase(cartItemId));
 
     expect(cart, isA<List<String>>());
     expect(cart, isNotNull);
@@ -47,7 +48,7 @@ void main() async {
     String cartItemId = '57';
     List<String>? cart = sharedPreferences.getStringList('cart');
 
-    await addToCartUsecase(cartItemId).then((value) => removeSingleItemFromCartUsecase(cartItemId));
+    await addToCartUsecase(cartItem).then((value) => removeSingleItemFromCartUsecase(cartItemId));
     int cartItemIdQuantity = cart!.where((item) => item == cartItemId).length;
 
     expect(cart, isA<List<String>>());
@@ -56,7 +57,15 @@ void main() async {
   });
 }
 
-List<CartItem> cartItems = [
-  CartItem(id: '1', quantity: 2),
-  CartItem(id: '2', quantity: 3),
-];
+List<CartItem> cartItems = List.generate(
+    4,
+    (index) => CartItem(
+        id: 'id',
+        name: 'name',
+        image: 'image',
+        quantity: index,
+        oldPrice: index * 0.32,
+        price: index * 0.36));
+
+CartItem cartItem =
+    CartItem(id: 'id', name: 'name', image: 'image', quantity: 7, oldPrice: 0.32, price: 0.36);

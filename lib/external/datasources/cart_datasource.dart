@@ -14,14 +14,15 @@ class CartDatasourceImpl implements CartDatasource {
   CartDatasourceImpl(this.dio, this.sharedPreferences);
 
   @override
-  Future<void> addToCart(String promotionId) async {
+  Future<void> addToCart(CartItem cartItem) async {
     try {
       List<String>? cart = getCartSharedPreferences();
+      String cartToAdd = CartItemAdapter().toLocalStorage(cartItem);
 
       if (cart == null) {
-        sharedPreferences.setStringList('cart', [promotionId]);
+        sharedPreferences.setStringList('cart', [cartToAdd]);
       } else {
-        sharedPreferences.setStringList('cart', [...cart, promotionId]);
+        sharedPreferences.setStringList('cart', [...cart, cartToAdd]);
       }
     } on DataSourceError catch (e) {
       throw DataSourceError(e.toString());

@@ -13,9 +13,9 @@ class CartRepositoryImpl implements CartRepository {
 
   CartRepositoryImpl(this._cartDatasource);
   @override
-  Future<Either<CartError, void>> addToCart(String promotionId) async {
+  Future<Either<CartError, void>> addToCart(CartItem cartItem) async {
     try {
-      await _cartDatasource.addToCart(promotionId);
+      await _cartDatasource.addToCart(cartItem);
       // ignore: void_checks
       return const Right('');
     } on CartError catch (e) {

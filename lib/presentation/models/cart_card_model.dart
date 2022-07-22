@@ -1,11 +1,11 @@
-class CartItem {
+class CartCardModel {
   String id;
   String name;
   String image;
   int quantity;
   double oldPrice;
   double price;
-  CartItem({
+  CartCardModel({
     required this.id,
     required this.name,
     required this.image,

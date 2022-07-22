@@ -1,10 +1,18 @@
+import 'package:vinicius_eng_gruposbf_mobile/presentation/models/cart_card_model.dart';
+
 abstract class CartState {}
 
 class InitialCartState extends CartState {}
 
-class SuccessCartState extends CartState {}
+class SuccessCartState extends CartState {
+  final List<CartCardModel> cart;
 
-class EmptyCartState extends CartState {}
+  SuccessCartState(this.cart);
+}
+
+class EmptyCartState extends CartState {
+  final List<CartCardModel> cart = [];
+}
 
 class LoadingCartState extends CartState {}
 
