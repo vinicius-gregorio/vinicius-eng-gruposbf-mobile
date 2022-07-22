@@ -14,20 +14,20 @@ void main() {
   final repository = CartRepositoryMock();
   final usecase = GetCartUsecaseImpl(repository);
   test('should complete usecase', () {
-    when(() => repository.getCart()).thenAnswer((_) async => right(<CartItem>[]));
+    when(() => repository.getCart()).thenAnswer((_) async => right(<String>[]));
     expect(usecase(), completes);
   });
   test('should return a cart list', () async {
-    when(() => repository.getCart()).thenAnswer((_) async => right(<CartItem>[]));
+    when(() => repository.getCart()).thenAnswer((_) async => right(<String>[]));
     final result = await usecase();
     var fold = result.fold(
       (l) => left('expected a right'),
       (r) => r,
     );
-    expect(fold, isA<List<CartItem>>());
+    expect(fold, isA<List<String>>());
   });
   test('should return right', () async {
-    when(() => repository.getCart()).thenAnswer((_) async => right(<CartItem>[]));
+    when(() => repository.getCart()).thenAnswer((_) async => right(<String>[]));
     final result = await usecase();
     expect(result.isRight(), true);
   });
