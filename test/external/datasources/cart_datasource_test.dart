@@ -1,9 +1,11 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vinicius_eng_gruposbf_mobile/config/app_log.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/add_to_cart_usecase.dart';
+import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/get_cart_usecase.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/remove_single_item_from_cart.dart';
 import 'package:vinicius_eng_gruposbf_mobile/external/datasources/cart_datasource.dart';
 import 'package:vinicius_eng_gruposbf_mobile/infra/repositories/cart_repository.dart';
@@ -18,6 +20,8 @@ void main() async {
       CartRepositoryImpl(CartDatasourceImpl(dio, sharedPreferences)));
   final removeSingleItemFromCartUsecase = RemoveSingleItemFromCartUsecaseImpl(
       CartRepositoryImpl(CartDatasourceImpl(dio, sharedPreferences)));
+  final getCartUsecase =
+      GetCartUsecaseImpl(CartRepositoryImpl(CartDatasourceImpl(dio, sharedPreferences)));
   test('should completes usecase', () {
     expect(addToCartUsecase(cartItem), completes);
   });
@@ -25,12 +29,10 @@ void main() async {
   test('should add to cart', () async {
     addToCartUsecase(cartItem);
     List<String>? cart = sharedPreferences.getStringList('cart');
-    // String? id = cart?.last;
-    // appLog(id.toString());
-    // expect(id, '2');
-    // expect(id, isA<String>());
-    // expect(cart, isA<List<String>>());
-    print(cart);
+    String? id = cart?.last;
+    appLog(id.toString());
+    expect(id, isA<String>());
+    expect(cart, isA<List<CartItem>>());
   });
 
   test('should remove item from cart', () async {
@@ -54,6 +56,15 @@ void main() async {
     expect(cart, isA<List<String>>());
     expect(cartItemIdQuantity, isNotNull);
     expect(cartItemIdQuantity, 0);
+  });
+
+  test('should get cart', () async {
+    List<String>? cart = sharedPreferences.getStringList('cart');
+    final result = await getCartUsecase();
+    final cartItems = result.fold((l) => left('should return right'), (r) => r);
+    expect(cart, isA<List<String>>());
+    expect(cartItems, isA<List<CartItem>>());
+    expect(cart, isNotNull);
   });
 }
 

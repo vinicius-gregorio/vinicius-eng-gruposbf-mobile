@@ -51,7 +51,7 @@ class CartDatasourceImpl implements CartDatasource {
       if (cart == null) {
         return [];
       } else {
-        return cart;
+        return CartItemAdapter.fromLocalStorage(cart);
       }
     } on DataSourceError catch (e) {
       throw DataSourceError(e.toString());

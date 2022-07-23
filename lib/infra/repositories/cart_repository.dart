@@ -37,7 +37,7 @@ class CartRepositoryImpl implements CartRepository {
   GetCartCall getCart() async {
     try {
       final response = await _cartDatasource.getCart();
-      return Right(response as List<String>);
+      return Right(response as List<CartItem>);
     } on CartError catch (e) {
       return Left(e);
     }
