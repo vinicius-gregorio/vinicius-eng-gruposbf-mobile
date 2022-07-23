@@ -8,9 +8,10 @@ import 'package:vinicius_eng_gruposbf_mobile/presentation/widgets/promotion_card
 import 'components/promotion_card_free_shipping_card.dart';
 
 class PromotionCard extends StatelessWidget {
-  const PromotionCard({Key? key, required this.promotion}) : super(key: key);
+  const PromotionCard({Key? key, required this.promotion, required this.onTapBuy})
+      : super(key: key);
   final Promotion promotion;
-
+  final VoidCallback onTapBuy;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,7 +81,12 @@ class PromotionCard extends StatelessWidget {
               ),
               Align(
                   alignment: Alignment.bottomCenter,
-                  child: AppButton(buttonText: 'COMPRAR', onPressed: () {})),
+                  child: AppButton(
+                      buttonText: 'COMPRAR',
+                      onPressed: () {
+                        print('comprar');
+                        onTapBuy();
+                      })),
             ],
           ),
           Positioned(

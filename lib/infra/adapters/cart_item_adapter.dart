@@ -9,14 +9,15 @@ class CartItemAdapter {
   }
 
   String toLocalStorage(CartItem cartItem) {
-    return '${cartItem.id}-${cartItem.name}-${cartItem.image}-${cartItem.quantity}-${cartItem.oldPrice}-${cartItem.price}';
+    return '${cartItem.id}|${cartItem.name}|${cartItem.image}|${cartItem.quantity}|${cartItem.oldPrice}|${cartItem.price}';
     // return 'CartItem(id: $id, name: $name, image: $image, quantity: $quantity, oldPrice: $oldPrice, price: $price)';
   }
 
   static List<CartItem> fromLocalStorage(List<String> data) {
     List<CartItem> cartItems = [];
     data.forEach((item) {
-      List<String> itemData = item.split('-');
+      List<String> itemData = item.split('|');
+
       cartItems.add(CartItem(
         id: itemData[0],
         name: itemData[1],

@@ -8,6 +8,7 @@ import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/add_to_cart_us
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/get_cart_usecase.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/remove_single_item_from_cart.dart';
 import 'package:vinicius_eng_gruposbf_mobile/external/datasources/cart_datasource.dart';
+import 'package:vinicius_eng_gruposbf_mobile/infra/adapters/cart_item_adapter.dart';
 import 'package:vinicius_eng_gruposbf_mobile/infra/repositories/cart_repository.dart';
 
 void main() async {
@@ -30,9 +31,14 @@ void main() async {
     addToCartUsecase(cartItem);
     List<String>? cart = sharedPreferences.getStringList('cart');
     String? id = cart?.last;
+    // print(cart);
+    // List<CartItem> carts = CartItemAdapter.fromLocalStorage(cart!).toList();
+    // carts.forEach((element) {
+    //   print(element.quantity.toString());
+    // });
     appLog(id.toString());
     expect(id, isA<String>());
-    expect(cart, isA<List<CartItem>>());
+    expect(cart, isA<List<String>>());
   });
 
   test('should remove item from cart', () async {
@@ -62,6 +68,7 @@ void main() async {
     List<String>? cart = sharedPreferences.getStringList('cart');
     final result = await getCartUsecase();
     final cartItems = result.fold((l) => left('should return right'), (r) => r);
+    //   print(cart);
     expect(cart, isA<List<String>>());
     expect(cartItems, isA<List<CartItem>>());
     expect(cart, isNotNull);

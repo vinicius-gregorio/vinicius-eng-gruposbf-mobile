@@ -13,6 +13,7 @@ import 'package:vinicius_eng_gruposbf_mobile/external/datasources/cart_datasourc
 import 'package:vinicius_eng_gruposbf_mobile/external/datasources/promotion_datasource.dart';
 import 'package:vinicius_eng_gruposbf_mobile/infra/datasources/cart_datasource.dart';
 import 'package:vinicius_eng_gruposbf_mobile/infra/datasources/promotion_datasource.dart';
+import 'package:vinicius_eng_gruposbf_mobile/infra/repositories/cart_repository.dart';
 import 'package:vinicius_eng_gruposbf_mobile/infra/repositories/promotion_repository.dart';
 import 'package:get_it/get_it.dart';
 
@@ -32,6 +33,7 @@ Future<void> registerDependencies() async {
 //cart
   getIt.registerFactory<CartDatasource>(
       () => CartDatasourceImpl(getIt.get<Dio>(), getIt.get<SharedPreferences>()));
+  getIt.registerFactory<CartRepository>(() => CartRepositoryImpl(getIt.get<CartDatasource>()));
   getIt.registerFactory<GetCartUsecase>(() => GetCartUsecaseImpl(getIt.get<CartRepository>()));
   getIt.registerFactory<AddToCartUsecase>(() => AddToCartUsecaseImpl(getIt.get<CartRepository>()));
   getIt.registerFactory<CheckoutCartUsecase>(

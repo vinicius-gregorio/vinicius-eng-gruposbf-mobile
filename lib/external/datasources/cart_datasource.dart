@@ -18,9 +18,25 @@ class CartDatasourceImpl implements CartDatasource {
     try {
       List<String>? cart = getCartSharedPreferences();
       String cartToAdd = CartItemAdapter().toLocalStorage(cartItem);
+      List<CartItem> cartModel = cart == null ? [] : CartItemAdapter.fromLocalStorage(cart);
 
-      if (cart == null) {
+      if (cart == null || cart.isEmpty) {
         sharedPreferences.setStringList('cart', [cartToAdd]);
+      } else if (cartModel.map((e) => e.id).contains(cartItem.id)) {
+        for (int i = 0; i < cartModel.length; i++) {
+          CartItem item = cartModel[i];
+          if (cartItem.id == item.id) {
+            cartModel[i].quantity += 1;
+          }
+        }
+
+        List<String> newCart = [];
+        // ignore: avoid_function_literals_in_foreach_calls
+        cartModel.forEach((element) {
+          newCart.add(CartItemAdapter().toLocalStorage(element));
+        });
+
+        sharedPreferences.setStringList('cart', newCart);
       } else {
         sharedPreferences.setStringList('cart', [...cart, cartToAdd]);
       }
@@ -44,11 +60,11 @@ class CartDatasourceImpl implements CartDatasource {
   }
 
   @override
-  Future<List> getCart() async {
+  Future<List<CartItem>> getCart() async {
     try {
       List<String>? cart = getCartSharedPreferences();
 
-      if (cart == null) {
+      if (cart == null || cart.isEmpty) {
         return [];
       } else {
         return CartItemAdapter.fromLocalStorage(cart);
