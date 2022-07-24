@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_text_styles.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/utils/extensions.dart';
 
 class OrderResumeTotal extends StatelessWidget {
   const OrderResumeTotal({Key? key, required this.price}) : super(key: key);
@@ -18,7 +19,7 @@ class OrderResumeTotal extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('Total', style: AppTextStyles.headingBoldSM),
-          Text(price.toString(), style: AppTextStyles.headingBoldSM),
+          Text(price.formatToBrl(), style: AppTextStyles.headingBoldSM),
         ],
       ),
     );

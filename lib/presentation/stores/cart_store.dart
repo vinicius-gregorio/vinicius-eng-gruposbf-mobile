@@ -30,7 +30,7 @@ class CartStore extends ValueNotifier {
     try {
       var service = GetIt.I.get<AddToCartUsecase>();
       await service(cartItem);
-      await getCart();
+      _reload();
     } catch (e) {
       value = ErrorCartState(e.toString());
     }
@@ -40,7 +40,7 @@ class CartStore extends ValueNotifier {
     try {
       var service = GetIt.I.get<RemoveSingleItemFromCartUsecase>();
       await service(cartItemId);
-      await getCart();
+      _reload();
     } catch (e) {
       value = ErrorCartState(e.toString());
     }
@@ -53,6 +53,41 @@ class CartStore extends ValueNotifier {
       await getCart();
     } catch (e) {
       value = ErrorCartState(e.toString());
+    }
+  }
+
+  Future<double> getSubtotal() async {
+    try {
+      List<CartItem> cart = await _getCart();
+      double subtotal = 0;
+
+      for (CartItem cartItem in cart) {
+        subtotal += cartItem.price * cartItem.quantity;
+      }
+      return subtotal;
+    } catch (e) {
+      value = ErrorCartState('Erro ao obter subtotal');
+      return 0.0;
+    }
+  }
+
+  void _reload() async {
+    await getCart();
+  }
+
+  Future<List<CartItem>> _getCart() async {
+    value = LoadingCartState();
+    try {
+      var service = GetIt.I.get<GetCartUsecase>();
+      var fold = await service();
+      List<CartItem> cart = fold.fold((l) => [], (r) => r);
+      if (cart.isEmpty) {
+        return [];
+      } else {
+        return cart;
+      }
+    } catch (e) {
+      return [];
     }
   }
 }

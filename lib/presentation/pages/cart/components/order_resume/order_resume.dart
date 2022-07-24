@@ -3,6 +3,7 @@ import 'package:vinicius_eng_gruposbf_mobile/presentation/pages/cart/components/
 import 'package:vinicius_eng_gruposbf_mobile/presentation/pages/cart/components/order_resume/components/order_resume_total.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_text_styles.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/widgets/app_button.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/utils/extensions.dart';
 
 class OrderResume extends StatelessWidget {
   const OrderResume({
@@ -40,7 +41,7 @@ class OrderResume extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Subtotal', style: AppTextStyles.bodyRegularPBlack),
-                Text('R\$ $subtotal', style: AppTextStyles.icon),
+                Text(subtotal.formatToBrl(), style: AppTextStyles.icon),
               ],
             ),
           ),
@@ -53,7 +54,7 @@ class OrderResume extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Desconto', style: AppTextStyles.bodyRegularPBlack),
-                Text('R\$ $discount', style: AppTextStyles.icon),
+                Text(discount.formatToBrl(), style: AppTextStyles.icon),
               ],
             ),
           ),

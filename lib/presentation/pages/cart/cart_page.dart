@@ -98,12 +98,16 @@ class _CartPageState extends State<CartPage> {
                             const SizedBox(
                               height: 32,
                             ),
-                            OrderResume(
-                              confirmOrder: () {},
-                              discount: 0.0,
-                              subtotal: 0,
-                              total: 0,
-                            ),
+                            FutureBuilder<double>(
+                                future: store.getSubtotal(),
+                                builder: (context, snapshot) {
+                                  return OrderResume(
+                                    confirmOrder: () {},
+                                    discount: 0.0,
+                                    subtotal: snapshot.data ?? 0.0,
+                                    total: 0,
+                                  );
+                                }),
                             const SizedBox(
                               height: 68,
                             ),
