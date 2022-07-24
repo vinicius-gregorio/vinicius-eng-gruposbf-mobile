@@ -32,7 +32,9 @@ class _CartPageState extends State<CartPage> {
         backgroundColor: AppColors.appBackground,
         appBar: const PreferredSize(
           preferredSize: Size(double.infinity, 104),
-          child: CentauroAppBar(),
+          child: CentauroAppBar(
+            cartLength: 2,
+          ),
         ),
         body: ValueListenableBuilder(
             valueListenable: store,
@@ -105,7 +107,7 @@ class _CartPageState extends State<CartPage> {
                                     confirmOrder: () {},
                                     discount: 0.0,
                                     subtotal: snapshot.data ?? 0.0,
-                                    total: 0,
+                                    total: snapshot.data ?? 0.0,
                                   );
                                 }),
                             const SizedBox(

@@ -89,4 +89,9 @@ class AppTextStyles {
     fontSize: 22,
     color: AppColors.blackHeadlineText,
   );
+  static TextStyle cartText = GoogleFonts.roboto(
+    fontWeight: FontWeight.w700,
+    fontSize: 10,
+    color: AppColors.blackHeadlineText,
+  );
 }

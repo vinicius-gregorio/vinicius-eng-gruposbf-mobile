@@ -6,6 +6,7 @@ import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/get_cart_useca
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/remove_from_cart_usecase.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/remove_single_item_from_cart.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/states/cart_state.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/appbar_store.dart';
 
 class CartStore extends ValueNotifier {
   CartStore() : super(InitialCartState());
@@ -33,6 +34,8 @@ class CartStore extends ValueNotifier {
       _reload();
     } catch (e) {
       value = ErrorCartState(e.toString());
+    } finally {
+      _reloadAppbar();
     }
   }
 
@@ -43,6 +46,8 @@ class CartStore extends ValueNotifier {
       _reload();
     } catch (e) {
       value = ErrorCartState(e.toString());
+    } finally {
+      _reloadAppbar();
     }
   }
 
@@ -53,6 +58,8 @@ class CartStore extends ValueNotifier {
       await getCart();
     } catch (e) {
       value = ErrorCartState(e.toString());
+    } finally {
+      _reloadAppbar();
     }
   }
 
@@ -89,5 +96,10 @@ class CartStore extends ValueNotifier {
     } catch (e) {
       return [];
     }
+  }
+
+  void _reloadAppbar() {
+    final appbarStore = GetIt.I.get<AppBarStore>();
+    appbarStore.getCartLength();
   }
 }

@@ -33,14 +33,16 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: AppColors.appBackground,
           appBar: const PreferredSize(
             preferredSize: Size(double.infinity, 104),
-            child: CentauroAppBar(),
+            child: CentauroAppBar(cartLength: 2),
           ),
           body: ValueListenableBuilder(
               valueListenable: store,
               builder: ((context, state, child) {
                 if (state is LoadingHomeState) {
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: AppColors.redBackground,
+                    ),
                   );
                 }
 
