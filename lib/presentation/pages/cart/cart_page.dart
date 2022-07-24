@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/pages/cart/components/cart_item_card/cart_item_card.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/pages/cart/components/order_resume/order_resume.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/states/cart_state.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/cart_store.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_colors.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_text_styles.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/widgets/centauro_footer/centauro_footer.dart';
 
 import '../../widgets/centauro_app_bar/centauro_app_bar.dart';
 
@@ -50,40 +52,65 @@ class _CartPageState extends State<CartPage> {
               if (state is SuccessCartState) {
                 print(state.cart);
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.only(top: 16),
                   child: ListView(
                     children: [
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Meu Carrinho',
-                          style: AppTextStyles.headingRedularXXS,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Meu Carrinho',
+                                style: AppTextStyles.headingRedularXXS,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: state.cart.length,
+                              itemBuilder: (context, index) {
+                                CartItem cartItem = state.cart[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                  child: CartItemCard(
+                                    cartItem: cartItem,
+                                    onMinusTap: () {},
+                                    onPlusTap: () async {
+                                      store.addToCart(cartItem);
+                                    },
+                                    onRemoveTap: () {
+                                      store.removeOneItemQuantity(cartItem.id);
+                                    },
+                                    onRemoveAllTap: () {
+                                      store.removeItem(cartItem.id);
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            OrderResume(
+                              confirmOrder: () {},
+                              discount: 0.0,
+                              subtotal: 0,
+                              total: 0,
+                            ),
+                            const SizedBox(
+                              height: 68,
+                            ),
+                          ],
                         ),
                       ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.cart.length,
-                        itemBuilder: (context, index) {
-                          CartItem cartItem = state.cart[index];
-                          return CartItemCard(
-                            cartItem: cartItem,
-                            onMinusTap: () {},
-                            onPlusTap: () async {
-                              store.addToCart(cartItem);
-                            },
-                            onRemoveTap: () {
-                              store.removeOneItemQuantity(cartItem.id);
-                            },
-                            onRemoveAllTap: () {
-                              store.removeItem(cartItem.id);
-                            },
-                          );
-                        },
-                      ),
+                      const CentauroFooter(),
                     ],
                   ),
                 );

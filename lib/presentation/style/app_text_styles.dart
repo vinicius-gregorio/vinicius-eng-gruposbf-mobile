@@ -73,4 +73,20 @@ class AppTextStyles {
     fontSize: 10,
     color: AppColors.pureBlack,
   );
+  static TextStyle bodyBoldXL = GoogleFonts.roboto(
+    fontWeight: FontWeight.w700,
+    fontSize: 18,
+    color: AppColors.pureBlack,
+  );
+  static TextStyle bodyRegularMd = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    color: AppColors.blackHeadlineText,
+  );
+
+  static TextStyle headingBoldSM = GoogleFonts.roboto(
+    fontWeight: FontWeight.w700,
+    fontSize: 22,
+    color: AppColors.blackHeadlineText,
+  );
 }

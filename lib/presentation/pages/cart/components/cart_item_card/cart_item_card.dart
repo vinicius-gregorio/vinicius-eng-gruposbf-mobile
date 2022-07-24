@@ -37,6 +37,9 @@ class CartItemCard extends StatelessWidget {
               height: 80,
               width: 80,
             ),
+            const SizedBox(
+              width: 32,
+            ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -83,6 +86,14 @@ class CartItemCard extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text('R\$ ${cartItem.price}', style: AppTextStyles.bodyBoldGG),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text('R\$${cartItem.oldPrice}', style: AppTextStyles.oldPrice),
                 ],
               ),
             ),

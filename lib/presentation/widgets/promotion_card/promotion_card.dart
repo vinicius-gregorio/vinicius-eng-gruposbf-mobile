@@ -55,7 +55,7 @@ class PromotionCard extends StatelessWidget {
                   const SizedBox(
                     width: 8,
                   ),
-                  Text('R\$ ${promotion.oldPrice}',
+                  Text('R\$${promotion.oldPrice}',
                       style: const TextStyle(fontSize: 10, decoration: TextDecoration.lineThrough)),
                 ],
               ),
