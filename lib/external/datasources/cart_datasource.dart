@@ -78,16 +78,25 @@ class CartDatasourceImpl implements CartDatasource {
   Future<void> removeFromCart(String cartItemId) async {
     try {
       List<String>? cart = getCartSharedPreferences();
+      List<CartItem> cartModel = cart == null ? [] : CartItemAdapter.fromLocalStorage(cart);
+
       if (cart == null) {
         return;
       } else {
-        for (int i = 0; i < cart.length; i++) {
-          if (cart[i] == cartItemId) {
-            cart.removeAt(i);
+        for (int i = 0; i < cartModel.length; i++) {
+          CartItem item = cartModel[i];
+          if (cartItemId == item.id) {
+            cartModel.removeAt(i);
           }
         }
+        cart.remove(cartItemId);
+        List<String> newCart = [];
+        // ignore: avoid_function_literals_in_foreach_calls
+        cartModel.forEach((element) {
+          newCart.add(CartItemAdapter().toLocalStorage(element));
+        });
 
-        await sharedPreferences.setStringList('cart', cart);
+        sharedPreferences.setStringList('cart', newCart);
       }
     } on DataSourceError catch (e) {
       throw DataSourceError(e.toString());
@@ -98,12 +107,29 @@ class CartDatasourceImpl implements CartDatasource {
   Future<void> removeSingleItemFromCart(String cartItemId) async {
     try {
       List<String>? cart = getCartSharedPreferences();
+      List<CartItem> cartModel = cart == null ? [] : CartItemAdapter.fromLocalStorage(cart);
+
       if (cart == null) {
         return;
       } else {
+        for (int i = 0; i < cartModel.length; i++) {
+          CartItem item = cartModel[i];
+          if (cartItemId == item.id) {
+            if (item.quantity > 1) {
+              cartModel[i].quantity -= 1;
+            } else {
+              cartModel.removeAt(i);
+            }
+          }
+        }
         cart.remove(cartItemId);
+        List<String> newCart = [];
+        // ignore: avoid_function_literals_in_foreach_calls
+        cartModel.forEach((element) {
+          newCart.add(CartItemAdapter().toLocalStorage(element));
+        });
 
-        await sharedPreferences.setStringList('cart', cart);
+        sharedPreferences.setStringList('cart', newCart);
       }
     } on DataSourceError catch (e) {
       throw DataSourceError(e.toString());

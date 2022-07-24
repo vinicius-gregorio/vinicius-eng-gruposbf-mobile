@@ -51,4 +51,26 @@ class AppTextStyles {
     fontSize: 18,
     color: AppColors.greyDarkBackground,
   );
+
+  static TextStyle headingRedularXXS = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 18,
+    color: AppColors.pureBlack,
+  );
+  static TextStyle icon = GoogleFonts.roboto(
+    fontWeight: FontWeight.w700,
+    fontSize: 14,
+    color: AppColors.pureBlack,
+  );
+  static TextStyle quantityInCard = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    color: AppColors.pureBlack,
+  );
+
+  static TextStyle bodyRegularXS = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 10,
+    color: AppColors.pureBlack,
+  );
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
-import 'package:vinicius_eng_gruposbf_mobile/presentation/pages/cart/components/cart_item_card.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/pages/cart/components/cart_item_card/cart_item_card.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/states/cart_state.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/cart_store.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_colors.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_text_styles.dart';
 
 import '../../widgets/centauro_app_bar/centauro_app_bar.dart';
@@ -26,6 +27,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: AppColors.appBackground,
         appBar: const PreferredSize(
           preferredSize: Size(double.infinity, 104),
           child: CentauroAppBar(),
@@ -47,29 +49,43 @@ class _CartPageState extends State<CartPage> {
 
               if (state is SuccessCartState) {
                 print(state.cart);
-                return ListView(
-                  children: [
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Center(
-                      child: Text(
-                        'Promoções em destaque',
-                        style: AppTextStyles.headBoldMd,
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ListView(
+                    children: [
+                      const SizedBox(
+                        height: 8,
                       ),
-                    ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.cart.length,
-                      itemBuilder: (context, index) {
-                        CartItem cartItem = state.cart[index];
-                        return CartItemCard(
-                          cartItem: cartItem,
-                        );
-                      },
-                    ),
-                  ],
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Meu Carrinho',
+                          style: AppTextStyles.headingRedularXXS,
+                        ),
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.cart.length,
+                        itemBuilder: (context, index) {
+                          CartItem cartItem = state.cart[index];
+                          return CartItemCard(
+                            cartItem: cartItem,
+                            onMinusTap: () {},
+                            onPlusTap: () async {
+                              store.addToCart(cartItem);
+                            },
+                            onRemoveTap: () {
+                              store.removeOneItemQuantity(cartItem.id);
+                            },
+                            onRemoveAllTap: () {
+                              store.removeItem(cartItem.id);
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 );
               }
 
