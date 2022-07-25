@@ -36,6 +36,9 @@ class PromotionCard extends StatelessWidget {
               const SizedBox(height: 3),
               Visibility(
                 visible: promotion.freeShipping,
+                replacement: const SizedBox(
+                  height: 18,
+                ),
                 child: const PromotionCardFreeShippingCard(),
               ),
               const SizedBox(height: 3),
@@ -85,7 +88,6 @@ class PromotionCard extends StatelessWidget {
                   child: AppButton(
                       buttonText: 'COMPRAR',
                       onPressed: () {
-                        print('comprar');
                         onTapBuy();
                       })),
             ],

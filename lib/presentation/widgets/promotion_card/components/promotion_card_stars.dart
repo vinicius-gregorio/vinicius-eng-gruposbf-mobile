@@ -34,11 +34,13 @@ class PromotionCardStars extends StatelessWidget {
         child: SvgPicture.asset(AppImages.starIcon),
       ));
     }
+    print('filled + ${stars.length}');
+
     return stars;
   }
 
   List<Widget> _buildEmptyStars() {
-    int numberOfEmptyStars = numberOfStars - 5;
+    int numberOfEmptyStars = 5 - numberOfStars;
     List<Widget> stars = [];
 
     if (numberOfStars == 5 || numberOfEmptyStars < 1) {
@@ -51,6 +53,8 @@ class PromotionCardStars extends StatelessWidget {
         child: SvgPicture.asset(AppImages.starEmptyIcon),
       ));
     }
+    print('empty + ${stars.length}');
+
     return stars;
   }
 }
