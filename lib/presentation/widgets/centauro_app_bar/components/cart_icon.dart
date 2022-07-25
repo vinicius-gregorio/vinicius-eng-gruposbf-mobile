@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vinicius_eng_gruposbf_mobile/presentation/pages/cart/cart_page.dart';
+import 'package:vinicius_eng_gruposbf_mobile/config/custom_router.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_images.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_text_styles.dart';
 
@@ -11,7 +11,7 @@ class CartIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const CartPage()));
+        CustomRouter().push(context, '/cart');
       },
       child: Stack(
         children: [

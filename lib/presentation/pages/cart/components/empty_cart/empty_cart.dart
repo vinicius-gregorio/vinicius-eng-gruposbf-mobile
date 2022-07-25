@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:vinicius_eng_gruposbf_mobile/config/custom_router.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_images.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_text_styles.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/widgets/app_button.dart';
@@ -49,7 +50,7 @@ class EmptyCart extends StatelessWidget {
                     height: 48,
                     buttonText: 'Comece a comprar',
                     onPressed: () {
-                      Navigator.pop(context);
+                      CustomRouter().pop(context);
                     }),
               ),
             ],
