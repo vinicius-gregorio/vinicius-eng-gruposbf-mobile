@@ -3,8 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/states/appbar_state.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/appbar_store.dart';
-import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/cart_store.dart';
-import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/home_store.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_colors.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_images.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/widgets/centauro_app_bar/components/cart_icon.dart';

@@ -8,4 +8,5 @@ class AppImages {
   static String starEmptyIcon = 'assets/icons/star_empty_icon.svg';
   static String closeIcon = 'assets/icons/close_icon.svg';
   static String shoppingCartError = 'assets/images/shopping_cart_error.svg';
+  static String cartEmptyIcon = 'assets/icons/cart_empty_icon.svg';
 }

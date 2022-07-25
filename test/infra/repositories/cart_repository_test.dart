@@ -20,13 +20,6 @@ void main() {
     expect(cartDatasource.addToCart(cartItem), completion(cart));
   });
 
-  // test('should returns cart error', () async {
-  //   when(() => cartRepository.addToCart(cartItem)).thenAnswer((_) async => left(CartErrorMock()));
-  //   final action = await cartRepository.addToCart(cartItem);
-  //   final result = action.fold((l) => l, (r) => right('should return left'));
-  //   expect(result, isA<CartErrorMock>());
-  // });
-
   test('should call remove from cart with no errors', () async {
     const String cartItemId = 'id1';
     when(() => cartDatasource.removeFromCart(cartItemId)).thenAnswer((_) async => const Right(''));
@@ -52,7 +45,6 @@ void main() {
 
   test('should return error from  remove item quantity from cart', () async {
     const String cartItemId = 'cartItemId';
-    final cart = [cartItemId];
     when(() => cartDatasource.removeSingleItemFromCart(cartItemId))
         .thenAnswer((_) async => throw CartErrorMock());
     final response = await cartRepository.removeSingleItemFromCart(cartItemId);

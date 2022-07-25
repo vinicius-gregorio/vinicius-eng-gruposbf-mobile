@@ -17,7 +17,6 @@ import 'package:vinicius_eng_gruposbf_mobile/infra/repositories/cart_repository.
 import 'package:vinicius_eng_gruposbf_mobile/infra/repositories/promotion_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/appbar_store.dart';
-import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/cart_store.dart';
 
 Future<void> registerDependencies() async {
   GetIt getIt = GetIt.I;

@@ -52,7 +52,6 @@ class QuantityButtons extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              print('tap buy component');
               pressPlus();
             },
             child: Container(

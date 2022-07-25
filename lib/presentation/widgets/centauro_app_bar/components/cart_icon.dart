@@ -15,7 +15,7 @@ class CartIcon extends StatelessWidget {
       },
       child: Stack(
         children: [
-          SvgPicture.asset(AppImages.cartIcon),
+          SvgPicture.asset(cartLength < 1 ? AppImages.cartEmptyIcon : AppImages.cartIcon),
           if (cartLength != 0)
             Positioned(
                 right: 7.5,

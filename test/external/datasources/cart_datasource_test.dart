@@ -66,7 +66,6 @@ void main() async {
     List<String>? cart = sharedPreferences.getStringList('cart');
     final result = await getCartUsecase();
     final cartItems = result.fold((l) => left('should return right'), (r) => r);
-    //   print(cart);
     expect(cart, isA<List<String>>());
     expect(cartItems, isA<List<CartItem>>());
     expect(cart, isNotNull);
