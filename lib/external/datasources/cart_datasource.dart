@@ -49,10 +49,15 @@ class CartDatasourceImpl implements CartDatasource {
   Future<Response<ResponseBody>> checkoutCart(List<CartItem> cartItems) async {
     try {
       final items = cartItems.map((item) => CartItemAdapter.toMap(item)).toList();
-      final response = await dio.post('http://10.0.2.2:3000/checkout', data: {
+      final response = await dio.post('http://10.0.2.2:3000/cart', data: {
         "items": items,
       });
-      log(response.data);
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        sharedPreferences.setStringList('cart', []);
+      }
+      if (response.statusCode == 500) {
+        throw DataSourceError('Server error');
+      }
       return response.data;
     } on DataSourceError catch (e) {
       throw DataSourceError(e.toString());
@@ -134,6 +139,11 @@ class CartDatasourceImpl implements CartDatasource {
     } on DataSourceError catch (e) {
       throw DataSourceError(e.toString());
     }
+  }
+
+  @override
+  Future<void> cleanCart() async {
+    sharedPreferences.setStringList('cart', []);
   }
 
   List<String>? getCartSharedPreferences() {

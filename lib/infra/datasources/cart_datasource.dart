@@ -8,4 +8,5 @@ abstract class CartDatasource {
   Future<void> removeFromCart(String cartItemId);
   Future<void> removeSingleItemFromCart(String cartItemId);
   Future<Response> checkoutCart(List<CartItem> cartItems);
+  Future<void> cleanCart();
 }

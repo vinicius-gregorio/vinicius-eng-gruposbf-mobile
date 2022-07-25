@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/add_to_cart_usecase.dart';
+import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/checkout_cart_usecase.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/get_cart_usecase.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/remove_from_cart_usecase.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/remove_single_item_from_cart.dart';
@@ -75,6 +76,20 @@ class CartStore extends ValueNotifier {
     } catch (e) {
       value = ErrorCartState('Erro ao obter subtotal');
       return 0.0;
+    }
+  }
+
+  Future<void> confirmOrder() async {
+    value = LoadingCartState();
+    try {
+      var service = GetIt.I.get<CheckoutCartUsecase>();
+      List<CartItem> cart = await _getCart();
+      await service(cart);
+    } catch (e) {
+      value = ErrorCartState(e.toString());
+    } finally {
+      _reload();
+      _reloadAppbar();
     }
   }
 

@@ -9,4 +9,5 @@ abstract class CartRepository {
   Future<Either<CartError, void>> removeFromCart(String cartItemId);
   Future<Either<CartError, void>> removeSingleItemFromCart(String cartItemId);
   CheckoutCartCall checkoutCart(List<CartItem> cartItems);
+  Future<Either<CartError, void>> cleanCart();
 }

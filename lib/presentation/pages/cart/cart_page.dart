@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/pages/cart/components/cart_item_card/cart_item_card.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/pages/cart/components/empty_cart/empty_cart.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/pages/cart/components/order_resume/order_resume.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/states/cart_state.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/cart_store.dart';
@@ -41,18 +42,17 @@ class _CartPageState extends State<CartPage> {
             builder: (context, state, child) {
               if (state is LoadingCartState) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: AppColors.redBackground,
+                  ),
                 );
               }
 
               if (state is EmptyCartState) {
-                return Center(
-                  child: Text('Nenhum item no carrinho', style: AppTextStyles.bodyBoldGG),
-                );
+                return const EmptyCart();
               }
 
               if (state is SuccessCartState) {
-                print(state.cart);
                 return Padding(
                   padding: const EdgeInsets.only(top: 16),
                   child: ListView(
@@ -104,7 +104,9 @@ class _CartPageState extends State<CartPage> {
                                 future: store.getSubtotal(),
                                 builder: (context, snapshot) {
                                   return OrderResume(
-                                    confirmOrder: () {},
+                                    confirmOrder: () {
+                                      store.confirmOrder();
+                                    },
                                     discount: 0.0,
                                     subtotal: snapshot.data ?? 0.0,
                                     total: snapshot.data ?? 0.0,
@@ -126,7 +128,7 @@ class _CartPageState extends State<CartPage> {
                 return Center(
                   child: Text(
                     state.message,
-                    style: AppTextStyles.headBoldMd,
+                    style: AppTextStyles.headingBoldMd,
                   ),
                 );
               }

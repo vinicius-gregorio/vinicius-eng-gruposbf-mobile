@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/promotion.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_colors.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_text_styles.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/widgets/app_button.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/widgets/promotion_card/components/promotion_card_colors.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/widgets/promotion_card/components/promotion_card_stars.dart';
-
+import 'package:vinicius_eng_gruposbf_mobile/presentation/utils/extensions.dart';
 import 'components/promotion_card_free_shipping_card.dart';
 
 class PromotionCard extends StatelessWidget {
@@ -35,28 +36,28 @@ class PromotionCard extends StatelessWidget {
               const SizedBox(height: 3),
               Visibility(
                 visible: promotion.freeShipping,
-                replacement: const SizedBox(
-                  height: 18,
-                ),
                 child: const PromotionCardFreeShippingCard(),
               ),
               const SizedBox(height: 3),
               Expanded(
                 child: Container(),
               ),
-              Text(
-                promotion.name,
-                style: const TextStyle(fontSize: 12),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  promotion.name,
+                  style: AppTextStyles.bodyRegularPBlack,
+                ),
               ),
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Text('R\$ ${promotion.price}', style: const TextStyle(fontSize: 22)),
+                  Text(promotion.price.formatToBrl(), style: AppTextStyles.bodyBoldGG),
                   const SizedBox(
                     width: 8,
                   ),
-                  Text('R\$${promotion.oldPrice}',
-                      style: const TextStyle(fontSize: 10, decoration: TextDecoration.lineThrough)),
+                  Text('R\$${promotion.oldPrice.toString().replaceAll('.', ',')}',
+                      style: AppTextStyles.oldPrice),
                 ],
               ),
               const SizedBox(height: 10.87),
@@ -66,7 +67,7 @@ class PromotionCard extends StatelessWidget {
                   const SizedBox(width: 7.3),
                   Text(
                     '(${promotion.reviews})',
-                    style: const TextStyle(fontSize: 10),
+                    style: AppTextStyles.supportLightP,
                   ),
                 ],
               ),
@@ -99,9 +100,8 @@ class PromotionCard extends StatelessWidget {
                 color: AppColors.appBackground,
                 border: Border.all(color: AppColors.redBackground, width: 1),
               ),
-              child: Center(
-                  child: Text('${promotion.discount}%',
-                      style: const TextStyle(fontSize: 10, color: AppColors.redBackground))),
+              child:
+                  Center(child: Text('${promotion.discount}%', style: AppTextStyles.discountRed)),
             ),
           ),
         ],

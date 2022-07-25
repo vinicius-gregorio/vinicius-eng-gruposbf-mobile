@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_colors.dart';
+import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_text_styles.dart';
 
 class PromotionCardFreeShippingCard extends StatelessWidget {
   const PromotionCardFreeShippingCard({Key? key}) : super(key: key);
@@ -13,8 +14,7 @@ class PromotionCardFreeShippingCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(2),
         color: AppColors.greyDarkBackground,
       ),
-      child: const Center(
-          child: Text('Frete Grátis', style: TextStyle(color: Colors.white, fontSize: 12))),
+      child: Center(child: Text('Frete Grátis', style: AppTextStyles.bodyRegularPWhite)),
     );
   }
 }

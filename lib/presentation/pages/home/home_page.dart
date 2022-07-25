@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                       Center(
                         child: Text(
                           'Promoções em destaque',
-                          style: AppTextStyles.headBoldMd,
+                          style: AppTextStyles.headingBoldMd,
                         ),
                       ),
                       Padding(

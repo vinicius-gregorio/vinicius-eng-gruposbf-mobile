@@ -64,4 +64,15 @@ class CartRepositoryImpl implements CartRepository {
       return Left(e);
     }
   }
+
+  @override
+  Future<Either<CartError, void>> cleanCart() async {
+    try {
+      await _cartDatasource.cleanCart();
+      // ignore: void_checks
+      return const Right('');
+    } on CartError catch (e) {
+      return Left(e);
+    }
+  }
 }

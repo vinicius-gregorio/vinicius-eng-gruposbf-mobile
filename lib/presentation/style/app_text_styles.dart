@@ -9,7 +9,7 @@ class AppTextStyles {
       color: AppColors.greyHintText,
       fontStyle: FontStyle.italic);
 
-  static TextStyle headBoldMd = GoogleFonts.roboto(
+  static TextStyle headingBoldMd = GoogleFonts.roboto(
     fontWeight: FontWeight.w700,
     fontSize: 26,
     color: AppColors.blackHeadlineText,
@@ -31,6 +31,12 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 12,
     color: AppColors.greyDarkBackground,
+  );
+
+  static TextStyle bodyRegularPGreySupport = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+    color: AppColors.greySupport,
   );
 
   static TextStyle bodyBoldGG = GoogleFonts.roboto(
@@ -93,5 +99,17 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
     fontSize: 10,
     color: AppColors.blackHeadlineText,
+  );
+
+  static TextStyle supportLightP = GoogleFonts.roboto(
+    fontWeight: FontWeight.w300,
+    fontSize: 10,
+    color: AppColors.greySupport,
+  );
+
+  static TextStyle discountRed = GoogleFonts.roboto(
+    fontWeight: FontWeight.w700,
+    fontSize: 10,
+    color: AppColors.redBackground,
   );
 }
