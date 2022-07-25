@@ -21,14 +21,14 @@ void main() {
     expect(usecase(cartItems), completes);
   });
 
-  test('should return anything', () async {
+  test('should return a Response', () async {
     when(() => repository.checkoutCart(cartItems)).thenAnswer((_) async => right(httpResponse));
     final result = await usecase(cartItems);
     final fold = result.fold(
       (l) => left('expected a right'),
       (r) => r,
     );
-    expect(fold, 'anything');
+    expect(fold, isA<Response>());
   });
 
   test('should return CartError', () async {

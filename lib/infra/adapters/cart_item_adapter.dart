@@ -10,12 +10,12 @@ class CartItemAdapter {
 
   String toLocalStorage(CartItem cartItem) {
     return '${cartItem.id}|${cartItem.name}|${cartItem.image}|${cartItem.quantity}|${cartItem.oldPrice}|${cartItem.price}';
-    // return 'CartItem(id: $id, name: $name, image: $image, quantity: $quantity, oldPrice: $oldPrice, price: $price)';
   }
 
   static List<CartItem> fromLocalStorage(List<String> data) {
     List<CartItem> cartItems = [];
-    data.forEach((item) {
+
+    for (var item in data) {
       List<String> itemData = item.split('|');
 
       cartItems.add(CartItem(
@@ -26,7 +26,7 @@ class CartItemAdapter {
         oldPrice: double.parse(itemData[4]),
         price: double.parse(itemData[5]),
       ));
-    });
+    }
     return cartItems;
   }
 }

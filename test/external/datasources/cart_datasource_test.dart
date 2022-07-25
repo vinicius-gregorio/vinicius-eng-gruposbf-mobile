@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vinicius_eng_gruposbf_mobile/config/app_log.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/add_to_cart_usecase.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/get_cart_usecase.dart';
@@ -23,22 +22,21 @@ void main() async {
       CartRepositoryImpl(CartDatasourceImpl(dio, sharedPreferences)));
   final getCartUsecase =
       GetCartUsecaseImpl(CartRepositoryImpl(CartDatasourceImpl(dio, sharedPreferences)));
-  test('should completes usecase', () {
-    expect(addToCartUsecase(cartItem), completes);
+  test('should completes usecase', () async {
+    expect(await addToCartUsecase(cartItem), isA<Right>());
   });
 
   test('should add to cart', () async {
-    addToCartUsecase(cartItem);
+    await addToCartUsecase(cartItem);
+
     List<String>? cart = sharedPreferences.getStringList('cart');
-    String? id = cart?.last;
-    // print(cart);
-    // List<CartItem> carts = CartItemAdapter.fromLocalStorage(cart!).toList();
-    // carts.forEach((element) {
-    //   print(element.quantity.toString());
-    // });
-    appLog(id.toString());
-    expect(id, isA<String>());
+    List<CartItem> cartModel = cart == null ? [] : CartItemAdapter.fromLocalStorage(cart);
+
+    final find = cartModel.firstWhere((element) => element.id == cartItem.id);
+
     expect(cart, isA<List<String>>());
+    expect(cartModel, isA<List<CartItem>>());
+    expect(find, isA<CartItem>());
   });
 
   test('should remove item from cart', () async {
@@ -75,15 +73,11 @@ void main() async {
   });
 }
 
-List<CartItem> cartItems = List.generate(
-    4,
-    (index) => CartItem(
-        id: 'id',
-        name: 'name',
-        image: 'image',
-        quantity: index,
-        oldPrice: index * 0.32,
-        price: index * 0.36));
-
-CartItem cartItem =
-    CartItem(id: 'id', name: 'name', image: 'image', quantity: 7, oldPrice: 0.32, price: 0.36);
+CartItem cartItem = CartItem(
+  id: 'fasf3asfasd',
+  name: 'asdasdasd',
+  image: 'asdsadsad',
+  quantity: 7,
+  oldPrice: 2.32,
+  price: 3.36,
+);
