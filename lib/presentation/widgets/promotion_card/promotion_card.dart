@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vinicius_eng_gruposbf_mobile/config/custom_router.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/promotion.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_colors.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_text_styles.dart';
@@ -89,6 +90,7 @@ class PromotionCard extends StatelessWidget {
                       buttonText: 'COMPRAR',
                       onPressed: () {
                         onTapBuy();
+                        CustomRouter().push(context, '/cart');
                       })),
             ],
           ),

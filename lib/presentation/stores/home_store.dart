@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:vinicius_eng_gruposbf_mobile/config/custom_router.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/entities/promotion.dart';
 import 'package:vinicius_eng_gruposbf_mobile/domain/usecases/cart/add_to_cart_usecase.dart';
