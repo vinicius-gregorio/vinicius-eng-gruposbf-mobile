@@ -13,14 +13,8 @@ class PromotionCardStars extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int numberOfFilledStars = numberOfStars;
-    int numberOfEmptyStars = 0;
     return Row(
       children: [
-        // for (int i = 0; i < numberOfFilledStars; i++)
-        //   Padding(
-        //     padding: const EdgeInsets.only(left: 5.31),
-        //     child: SvgPicture.asset(AppImages.starIcon),
-        //   ),
         ..._buildFilledStars(numberOfFilledStars),
         ..._buildEmptyStars(),
       ],
@@ -35,11 +29,12 @@ class PromotionCardStars extends StatelessWidget {
         child: SvgPicture.asset(AppImages.starIcon),
       ));
     }
+
     return stars;
   }
 
   List<Widget> _buildEmptyStars() {
-    int numberOfEmptyStars = numberOfStars - 5;
+    int numberOfEmptyStars = 5 - numberOfStars;
     List<Widget> stars = [];
 
     if (numberOfStars == 5 || numberOfEmptyStars < 1) {
@@ -52,6 +47,7 @@ class PromotionCardStars extends StatelessWidget {
         child: SvgPicture.asset(AppImages.starEmptyIcon),
       ));
     }
+
     return stars;
   }
 }

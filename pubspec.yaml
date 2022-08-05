@@ -17,6 +17,9 @@ dependencies:
   get_it: ^7.2.0
   flutter_svg: ^1.1.1+1
   google_fonts: ^3.0.1
+  shared_preferences: ^2.0.15
+  intl: ^0.17.0
+  routemaster: ^1.0.1
   
 dev_dependencies:
   flutter_test:

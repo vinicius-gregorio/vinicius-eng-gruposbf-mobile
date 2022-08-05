@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vinicius_eng_gruposbf_mobile/domain/entities/cart_item.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/states/home_state.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/stores/home_store.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_colors.dart';
@@ -32,14 +33,16 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: AppColors.appBackground,
           appBar: const PreferredSize(
             preferredSize: Size(double.infinity, 104),
-            child: CentauroAppBar(),
+            child: CentauroAppBar(cartLength: 2),
           ),
           body: ValueListenableBuilder(
               valueListenable: store,
               builder: ((context, state, child) {
                 if (state is LoadingHomeState) {
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: AppColors.redBackground,
+                    ),
                   );
                 }
 
@@ -56,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                       Center(
                         child: Text(
                           'Promoções em destaque',
-                          style: AppTextStyles.headBoldMd,
+                          style: AppTextStyles.headingBoldMd,
                         ),
                       ),
                       Padding(
@@ -72,7 +75,16 @@ class _HomePageState extends State<HomePage> {
                           itemCount: state.promotions.length,
                           itemBuilder: ((context, index) {
                             Promotion promotion = state.promotions[index];
-                            return PromotionCard(promotion: promotion);
+                            return PromotionCard(
+                              promotion: promotion,
+                              onTapBuy: () => store.addToCart(CartItem(
+                                  id: promotion.id,
+                                  name: promotion.name,
+                                  image: promotion.image,
+                                  quantity: 1,
+                                  oldPrice: promotion.oldPrice,
+                                  price: promotion.price)),
+                            );
                           }),
                         ),
                       ),

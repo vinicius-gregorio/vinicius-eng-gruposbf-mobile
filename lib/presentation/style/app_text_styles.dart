@@ -9,7 +9,7 @@ class AppTextStyles {
       color: AppColors.greyHintText,
       fontStyle: FontStyle.italic);
 
-  static TextStyle headBoldMd = GoogleFonts.roboto(
+  static TextStyle headingBoldMd = GoogleFonts.roboto(
     fontWeight: FontWeight.w700,
     fontSize: 26,
     color: AppColors.blackHeadlineText,
@@ -33,6 +33,12 @@ class AppTextStyles {
     color: AppColors.greyDarkBackground,
   );
 
+  static TextStyle bodyRegularPGreySupport = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+    color: AppColors.greySupport,
+  );
+
   static TextStyle bodyBoldGG = GoogleFonts.roboto(
     fontWeight: FontWeight.w700,
     fontSize: 18,
@@ -50,5 +56,60 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
     fontSize: 18,
     color: AppColors.greyDarkBackground,
+  );
+
+  static TextStyle headingRedularXXS = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 18,
+    color: AppColors.pureBlack,
+  );
+  static TextStyle icon = GoogleFonts.roboto(
+    fontWeight: FontWeight.w700,
+    fontSize: 14,
+    color: AppColors.pureBlack,
+  );
+  static TextStyle quantityInCard = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    color: AppColors.pureBlack,
+  );
+
+  static TextStyle bodyRegularXS = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 10,
+    color: AppColors.pureBlack,
+  );
+  static TextStyle bodyBoldXL = GoogleFonts.roboto(
+    fontWeight: FontWeight.w700,
+    fontSize: 18,
+    color: AppColors.pureBlack,
+  );
+  static TextStyle bodyRegularMd = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    color: AppColors.blackHeadlineText,
+  );
+
+  static TextStyle headingBoldSM = GoogleFonts.roboto(
+    fontWeight: FontWeight.w700,
+    fontSize: 22,
+    color: AppColors.blackHeadlineText,
+  );
+  static TextStyle cartText = GoogleFonts.roboto(
+    fontWeight: FontWeight.w700,
+    fontSize: 10,
+    color: AppColors.blackHeadlineText,
+  );
+
+  static TextStyle supportLightP = GoogleFonts.roboto(
+    fontWeight: FontWeight.w300,
+    fontSize: 10,
+    color: AppColors.greySupport,
+  );
+
+  static TextStyle discountRed = GoogleFonts.roboto(
+    fontWeight: FontWeight.w700,
+    fontSize: 10,
+    color: AppColors.redBackground,
   );
 }

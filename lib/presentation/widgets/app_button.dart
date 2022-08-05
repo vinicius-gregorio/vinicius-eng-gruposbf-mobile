@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:vinicius_eng_gruposbf_mobile/presentation/style/app_colors.dart';
 
 class AppButton extends StatelessWidget {
-  const AppButton({Key? key, required this.buttonText, required this.onPressed}) : super(key: key);
+  const AppButton({Key? key, required this.buttonText, required this.onPressed, this.height})
+      : super(key: key);
   final String buttonText;
   final VoidCallback onPressed;
+  final double? height;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: onPressed,
       child: Container(
-        height: 30,
+        height: height ?? 30,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),

@@ -8,4 +8,6 @@ class AppColors {
   static const Color greyBorder = Color(0xFFD6D6D6);
   static const Color greyDarkBackground = Color(0xFF4D4D4D);
   static const Color blackHeadlineText = Color(0xFF1A1A1A);
+  static const Color pureBlack = Color(0xFF000000);
+  static const Color greySupport = Color(0xFF4D4D4D);
 }
